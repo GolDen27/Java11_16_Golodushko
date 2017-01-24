@@ -12,112 +12,228 @@ import java.util.Date;
 public class ShopServiceImpl implements ShopService {
 
     @Override
-    public void addBrand(Brand brand) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getBrandDAO().addBrand(brand);
+    public void addBrand(Brand brand) throws ServiceException{
+        try {
+            DAOFactory.getInstance().getBrandDAO().addBrand(brand);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+        }
     }
 
     @Override
-    public void deleteBrand(Brand brand) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getBrandDAO().deleteBrand(brand);
+    public void deleteBrand(Brand brand) throws ServiceException{
+        try {
+            DAOFactory.getInstance().getBrandDAO().deleteBrand(brand);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+        }
     }
 
     @Override
-    public void changeBrand(Brand newBrand, Brand oldBrand) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getBrandDAO().changeBrand(newBrand,oldBrand);
+    public Brand searchBrand(String title) throws ServiceException {
+        Brand brand = null;
+        try {
+             brand = DAOFactory.getInstance().getBrandDAO().searchBrand(title);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+        }
+        return brand;
+    }
+
+
+    @Override
+    public void addCatalog(Catalog catalog) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getCatalogDAO().addCatalog(catalog);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void addCatalog(Catalog catalog) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getCatalogDAO().addCatalog(catalog);
+    public void deleteCatalog(Catalog catalog) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getCatalogDAO().deleteCatalog(catalog);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void deleteCatalog(Catalog catalog) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getCatalogDAO().deleteCatalog(catalog);
+    public void addCategory(Category category) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getCategoryDAO().addCategory(category);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void addCategory(Category category) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getCategoryDAO().addCategory(category);
+    public void deleteCategory(Category category) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getCategoryDAO().deleteCategory(category);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void deleteCategory(Category category) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getCategoryDAO().deleteCategory(category);
+    public Category searchCategory(String title, String catalog) throws ServiceException {
+        Category category = null;
+        try {
+            DAOFactory.getInstance().getCategoryDAO().searchCategory(title,DAOFactory.getInstance().getCatalogDAO().searchCatalog(catalog));
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+        }
+        return category;
     }
 
     @Override
-    public void addContract(Contract contract) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getContractDAO().addContract(contract);
+    public void addContract(Contract contract) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getContractDAO().addContract(contract);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void deleteContract(Contract contract) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getContractDAO().deleteContract(contract);
+    public void deleteContract(Contract contract) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getContractDAO().deleteContract(contract);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public Contract searchContract(String contractNumber) throws ServiceException, DAOException {
-        return DAOFactory.getInstance().getContractDAO().searchContract(contractNumber);
+    public Contract searchContract(String contractNumber) throws ServiceException {
+        try {
+            return DAOFactory.getInstance().getContractDAO().searchContract(contractNumber);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void addGoods(Goods goods) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getGoodsDAO().addGoods(goods);
+    public void addGoods(Goods goods) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getGoodsDAO().addGoods(goods);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void deleteGoods(Goods goods) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getGoodsDAO().deleteGoods(goods);
+    public void deleteGoods(Goods goods) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getGoodsDAO().deleteGoods(goods);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void changeGoods(Goods newGoods, Goods oldGoods) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getGoodsDAO().changeGoods(newGoods, oldGoods);
+    public void changeGoods(Goods newGoods, Goods oldGoods) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getGoodsDAO().changeGoods(newGoods, oldGoods);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public Goods searchGoods(String name, Category category, Brand brand) throws ServiceException, DAOException {
-        return DAOFactory.getInstance().getGoodsDAO().searchGoods(name, category, brand);
+    public Goods searchGoods(String name, Category category, Brand brand) throws ServiceException {
+        try {
+            return DAOFactory.getInstance().getGoodsDAO().searchGoods(name, category, brand);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void addOrder(Order order) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getOrderDAO().addOrder(order);
+    public void addOrder(Order order) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getOrderDAO().addOrder(order);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void deleteOrder(Order order) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getOrderDAO().deleteOrder(order);
+    public void deleteOrder(Order order) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getOrderDAO().deleteOrder(order);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public Order searchOrder(Contract contract, Goods goods) throws ServiceException, DAOException {
-        return DAOFactory.getInstance().getOrderDAO().searchOrder(contract, goods);
+    public Order searchOrder(Contract contract, Goods goods) throws ServiceException {
+        try {
+            return DAOFactory.getInstance().getOrderDAO().searchOrder(contract, goods);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void addUser(User user) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getUserDAO().addUser(user);
+    public void addUser(User user) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getUserDAO().addUser(user);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void deleteUser(User user) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getUserDAO().deleteUser(user);
+    public void deleteUser(User user) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getUserDAO().deleteUser(user);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void changeUser(User oldUser, User newUser) throws ServiceException, DAOException {
-        DAOFactory.getInstance().getUserDAO().changeUser(oldUser, newUser);
+    public void changeUser(User oldUser, User newUser) throws ServiceException {
+        try {
+            DAOFactory.getInstance().getUserDAO().changeUser(oldUser, newUser);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public User searchUser(String passportID) throws ServiceException, DAOException {
-        return DAOFactory.getInstance().getUserDAO().searchUser(passportID);
+    public User searchUser(String passportID) throws ServiceException {
+        try {
+            return DAOFactory.getInstance().getUserDAO().searchUser(passportID);
+        } catch (DAOException e) {
+            throw new ServiceException(e.getMessage(),e.getCause());
+
+        }
     }
 
     @Override
-    public void returnOrder(User user, Contract contract, Order order) throws DAOException, ServiceException {
+    public void returnOrder(User user, Contract contract, Order order) throws ServiceException {
         try {
             Order workOrder = DAOFactory.getInstance().getOrderDAO().searchOrder(order.getContract(), order.getGoods());
             workOrder.setReturnTime(new Date());
@@ -133,7 +249,8 @@ public class ShopServiceImpl implements ShopService {
             workContract.setTotalCost(workContract.getTotalCost().add(fine));
             DAOFactory.getInstance().getContractDAO().chandeContract(workContract, contract);
         } catch (DAOException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e.getMessage(),e.getCause());
+
         }
 
     }

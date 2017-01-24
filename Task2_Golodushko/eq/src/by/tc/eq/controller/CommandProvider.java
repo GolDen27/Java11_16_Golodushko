@@ -3,6 +3,8 @@ package by.tc.eq.controller;
 import by.tc.eq.controller.command.Command;
 import by.tc.eq.controller.command.CommandName;
 import by.tc.eq.controller.command.impl.AddUser;
+import by.tc.eq.controller.command.impl.GiveRent;
+import by.tc.eq.controller.command.impl.ReturnRent;
 import by.tc.eq.controller.command.impl.WrongRequest;
 
 import java.util.HashMap;
@@ -14,6 +16,8 @@ final class CommandProvider {
     CommandProvider(){
         repository.put(CommandName.ADD_USER, new AddUser());
         repository.put(CommandName.WRONG_REQUEST, new WrongRequest());
+        repository.put(CommandName.GIVE_RENT, new GiveRent());
+        repository.put(CommandName.RETUTN_RENT, new ReturnRent());
         //...
     }
 

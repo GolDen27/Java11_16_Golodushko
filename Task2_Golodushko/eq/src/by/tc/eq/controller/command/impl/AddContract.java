@@ -2,7 +2,6 @@ package by.tc.eq.controller.command.impl;
 
 import by.tc.eq.bean.Contract;
 import by.tc.eq.controller.command.Command;
-import by.tc.eq.dao.exception.DAOException;
 import by.tc.eq.service.exception.ServiceException;
 import by.tc.eq.service.factory.ServiceFactory;
 
@@ -19,8 +18,6 @@ public class AddContract implements Command {
         contract.setContractNumber(s[1]);
         try {
             contract.setUser(ServiceFactory.getInstance().getShopService().searchUser(s[2]));
-        } catch (DAOException e) {
-            e.printStackTrace();
         } catch (ServiceException e) {
             e.printStackTrace();
         }
@@ -32,8 +29,6 @@ public class AddContract implements Command {
             ServiceFactory.getInstance().getShopService().addContract(contract);
             response = "ok";
         } catch (ServiceException e) {
-            response = e.getMessage();
-        } catch (DAOException e) {
             response = e.getMessage();
         }
 

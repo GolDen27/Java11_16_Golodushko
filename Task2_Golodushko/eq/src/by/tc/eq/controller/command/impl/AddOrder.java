@@ -2,7 +2,6 @@ package by.tc.eq.controller.command.impl;
 
 import by.tc.eq.bean.Order;
 import by.tc.eq.controller.command.Command;
-import by.tc.eq.dao.exception.DAOException;
 import by.tc.eq.service.exception.ServiceException;
 import by.tc.eq.service.factory.ServiceFactory;
 
@@ -29,8 +28,6 @@ public class AddOrder implements Command {
             order.setContract(ServiceFactory.getInstance().getShopService().searchContract(s[3]));
         } catch (ServiceException e) {
             e.printStackTrace();
-        } catch (DAOException e) {
-            e.printStackTrace();
         }
 
 
@@ -38,8 +35,6 @@ public class AddOrder implements Command {
             ServiceFactory.getInstance().getShopService().addOrder(order);
             response = "ok";
         } catch (ServiceException e) {
-            response = e.getMessage();
-        } catch (DAOException e) {
             response = e.getMessage();
         }
 

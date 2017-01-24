@@ -46,25 +46,6 @@ public class BrandDAOImpl implements BrandDAO {
 
     }
 
-    @Override
-    public void changeBrand(Brand newBrand, Brand oldBrand) throws DAOException {
-
-        ConnectionFactory connectionFactory = ConnectionFactory.getInstance();
-        Connection connection = connectionFactory.getConnectionPool().retrieve();
-
-        String sql = "update `brand` set `title`= ?  where `title`= ? ";
-
-        try (PreparedStatement st = connection.prepareStatement(sql)){
-            st.setString(1,newBrand.getTitle());
-            st.setString(2,oldBrand.getTitle());
-            int a = st.executeUpdate();
-        } catch (SQLException e) {
-            throw new DAOException("error update brand");
-        }
-
-        connectionFactory.getConnectionPool().putback(connection);
-
-    }
 
 
     @Override

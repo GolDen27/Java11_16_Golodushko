@@ -2,7 +2,6 @@ package by.tc.eq.controller.command.impl;
 
 import by.tc.eq.bean.User;
 import by.tc.eq.controller.command.Command;
-import by.tc.eq.dao.exception.DAOException;
 import by.tc.eq.service.exception.ServiceException;
 import by.tc.eq.service.factory.ServiceFactory;
 
@@ -23,8 +22,6 @@ public class AddUser implements Command{
             ServiceFactory.getInstance().getShopService().addUser(user);
             response = "ok";
         } catch (ServiceException e) {
-            response = e.getMessage();
-        } catch (DAOException e) {
             response = e.getMessage();
         }
 

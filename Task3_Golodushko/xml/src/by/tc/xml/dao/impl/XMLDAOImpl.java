@@ -42,4 +42,13 @@ public class XMLDAOImpl implements XMLDAO {
     public BufferedReader getReader() {
         return reader;
     }
+
+    @Override
+    public void closeReader() throws DAOException {
+        try {
+            reader.close();
+        } catch (IOException e) {
+            throw new DAOException(e.getMessage());
+        }
+    }
 }

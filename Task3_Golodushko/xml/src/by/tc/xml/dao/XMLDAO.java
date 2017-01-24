@@ -8,4 +8,5 @@ public interface XMLDAO {
     void setFile (String path) throws DAOException;
     char getSymbol () throws DAOException;
     BufferedReader getReader ();
+    void closeReader() throws DAOException;
 }

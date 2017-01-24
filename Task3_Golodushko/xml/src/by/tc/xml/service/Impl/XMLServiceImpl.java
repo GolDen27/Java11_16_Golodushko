@@ -107,6 +107,14 @@ public class XMLServiceImpl implements XMLService {
         return result;
     }
 
+    @Override
+    public void closeReader() throws ServiceExceptinon {
+        try {
+            DAOFactory.getInstance().getXmldao().closeReader();
+        } catch (DAOException e) {
+            throw new ServiceExceptinon(e.getMessage());
+        }
+    }
 
 
 }

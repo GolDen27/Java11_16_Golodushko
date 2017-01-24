@@ -13,6 +13,8 @@ public class Main {
                 System.out.println(toConsole);
             }
 
+            ServiceFactory.getInstance().getxmlService().closeReader();
+
         } catch (ServiceExceptinon serviceExceptinon) {
             System.out.println(serviceExceptinon.getMessage()+ serviceExceptinon.getCause());
         }

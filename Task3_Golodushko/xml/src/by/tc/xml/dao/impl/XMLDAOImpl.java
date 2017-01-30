@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class XMLDAOImpl implements XMLDAO {
     BufferedReader reader= null;
+    String SYSTEM_SYMBOL = "\t\r\n";
 
     @Override
     public void setFile(String path) throws DAOException {
@@ -24,13 +25,13 @@ public class XMLDAOImpl implements XMLDAO {
 
     @Override
     public char getSymbol() throws DAOException {
-        int symbol = 0;
+        int symbol;
         try {
             symbol = reader.read();
         } catch (IOException e) {
             throw new DAOException("err read symbol", e.getCause());
         }
-        if (symbol=='\t' || symbol=='\r' || symbol=='\n' ) {
+        if (SYSTEM_SYMBOL.indexOf(symbol)!=-1) {
             symbol = ' ';
         }
         return (char) symbol;

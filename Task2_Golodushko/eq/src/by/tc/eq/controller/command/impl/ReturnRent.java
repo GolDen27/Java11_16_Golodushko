@@ -26,6 +26,7 @@ public class ReturnRent implements Command {
 
             contract = ServiceFactory.getInstance().getShopService().searchContract(s[2]);
 
+            // ты что пил, чтобы такую строчку кода  написать?
             goods = ServiceFactory.getInstance().getShopService().searchGoods(s[3], ServiceFactory.getInstance().getShopService().searchCategory(s[4],s[5]), ServiceFactory.getInstance().getShopService().searchBrand(s[6]));
 
             order = ServiceFactory.getInstance().getShopService().searchOrder(contract, goods);

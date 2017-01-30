@@ -11,12 +11,19 @@ import java.util.Date;
 
 public class ShopServiceImpl implements ShopService {
 
+    // методы сервисов не имеют право отказаться от валидации параметров
+    // тебе эта фраза из конспекта или объяснения хоть что-то говорит?????
+    // и если говорит, тогда вопрос - ГДЕ?
     @Override
     public void addBrand(Brand brand) throws ServiceException{
         try {
             DAOFactory.getInstance().getBrandDAO().addBrand(brand);
         } catch (DAOException e) {
-            throw new ServiceException(e.getMessage(),e.getCause());
+            throw new ServiceException(e.getMessage(),e.getCause());// ну где же вы насмотрелись такого безобразия
+            // я вам что, примеры таких оборачиваний исклюений показывала
+            // ну что за бред
+            // включай голову и спрашивай объявнения у одногруппников
+            // на твоем проекте уже комменты писать надоело
         }
     }
 

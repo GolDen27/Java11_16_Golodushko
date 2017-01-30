@@ -14,7 +14,7 @@ public class BrandDAOImpl implements BrandDAO {
         ConnectionFactory connectionFactory = ConnectionFactory.getInstance();
         Connection connection = connectionFactory.getConnectionPool().retrieve();
 
-        String sql = "insert into `brand` (title) values (?)";
+        String sql = "insert into `brand` (title) values (?)";// это не локальная переменная
 
         try (PreparedStatement st = connection.prepareStatement(sql)){
             st.setString(1,brand.getTitle());
@@ -24,6 +24,8 @@ public class BrandDAOImpl implements BrandDAO {
         }
 
         connectionFactory.getConnectionPool().putback(connection);
+        // коннекшн в пул должен возвращаться всегда, а у тебя не всегда
+        // опять над кодом даже не подумал
 
     }
 

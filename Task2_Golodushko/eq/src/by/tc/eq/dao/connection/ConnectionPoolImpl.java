@@ -21,7 +21,7 @@ public class ConnectionPoolImpl implements ConnectionPool {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();// похоже исключения - это твоя беда
         }
         this.url = url;
         this.properties.put("user",user);
@@ -34,8 +34,11 @@ public class ConnectionPoolImpl implements ConnectionPool {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url,properties);
-        } catch (Exception e) {
-            throw new DAOException(e.getMessage());
+        } catch (Exception e) {// почему перехватывается Exception?
+            // мы же разбирали, в каких случаях его можно перезватывать
+            throw new DAOException(e.getMessage());// вот и потерял реальное исключение
+            // понимай, зачем на слое разрабатываются собственные исключения
+            // подсказка - не для того, чтобы в логе не было никакой информации о первоначальной причине исключения
         }
         return conn;
     }
@@ -65,7 +68,7 @@ public class ConnectionPoolImpl implements ConnectionPool {
     }
 
     @Override
-    public void closeAll() throws DAOException {
+    public void closeAll() throws DAOException {// а почему метод не синхронизированный?
         for (Connection cn : availableConns){
             try {
                 cn.close();

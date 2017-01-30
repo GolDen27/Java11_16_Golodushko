@@ -19,7 +19,8 @@ public class AddContract implements Command {
         try {
             contract.setUser(ServiceFactory.getInstance().getShopService().searchUser(s[2]));
         } catch (ServiceException e) {
-            e.printStackTrace();
+            e.printStackTrace();// почему catch гасит исключение?
+            // как ты потом планируешь приложение продолжить выполнять?
         }
         contract.setConclusionDate(new Date());
 
@@ -29,7 +30,8 @@ public class AddContract implements Command {
             ServiceFactory.getInstance().getShopService().addContract(contract);
             response = "ok";
         } catch (ServiceException e) {
-            response = e.getMessage();
+            response = e.getMessage();// не надо  сообщение из исключений отправлять клиенту
+            // в них содержится много информации, по которым можно узнать о структуре твоего проекта
         }
 
         return response;

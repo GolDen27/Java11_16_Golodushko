@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.epam.tc.com/web-app"
+            xmlns:tns="http://www.epam.tc.com/web-app"
+            elementFormDefault="qualified"
+            attributeFormDefault="qualified">
+
+    <xsd:element name="display-name" type="xsd:string"/>
+    <xsd:element name="welcome-file" type="xsd:string"/>
+    <xsd:element name="filter-name" type="xsd:string"/>
+    <xsd:element name="filter-class" type="xsd:string"/>
+    <xsd:element name="param-name" type="xsd:string"/>
+    <xsd:element name="param-value" type="xsd:string"/>
+    <xsd:element name="url-pattern" type="xsd:string"/>
+    <xsd:element name="dispatcher" type="xsd:string"/>
+    <xsd:element name="listener-class" type="xsd:string"/>
+    <xsd:element name="servlet-name" type="xsd:string"/>
+    <xsd:element name="servlet-class" type="xsd:string"/>
+    <xsd:element name="exception-type" type="xsd:string"/>
+    <xsd:element name="location" type="xsd:string"/>
+    <xsd:element name="error-code" type="xsd:string"/>
+
+    <xsd:attribute name="id" type="xsd:string"/>
+    <xsd:attribute name="version" type="xsd:string"/>
+    
+    <xsd:element name="init-param" type="tns:init-paramType"/>
+
+    <xsd:element name="welcome-file-list" type="tns:welcome-file-listType"/>
+    <xsd:element name="filter" type="tns:filterType"/>
+    <xsd:element name="filter-mapping" type="tns:filter-mappingType"/>
+    <xsd:element name="listener" type="tns:listenerType"/>
+    <xsd:element name="servlet" type="tns:servletType"/>
+    <xsd:element name="servlet-mapping" type="tns:servlet-mappingType"/>
+    <xsd:element name="error-page" type="tns:error-pageType"/>
+    <xsd:element name="web-app" type="tns:web-appType"/>
+
+    <xsd:complexType name="init-paramType">
+        <xsd:sequence>
+            <xsd:element ref="tns:param-name"/>
+            <xsd:element ref="tns:param-value"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="welcome-file-listType">
+        <xsd:sequence minOccurs="6" maxOccurs="6">
+            <xsd:element ref="tns:welcome-file"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="filterType">
+        <xsd:sequence>
+            <xsd:element ref="tns:filter-name"/>
+            <xsd:element ref="tns:filter-class"/>
+            <xsd:element ref="tns:init-param" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="filter-mappingType">
+        <xsd:sequence>
+            <xsd:element ref="tns:filter-name"/>
+            <xsd:element ref="tns:url-pattern"/>
+            <xsd:element ref="tns:dispatcher"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="listenerType">
+        <xsd:sequence>
+            <xsd:element ref="tns:listener-class"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="servletType">
+        <xsd:sequence>
+            <xsd:element ref="tns:servlet-name"/>
+            <xsd:element ref="tns:servlet-class"/>
+            <xsd:element ref="tns:init-param" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="servlet-mappingType">
+        <xsd:sequence>
+            <xsd:element ref="tns:servlet-name"/>
+            <xsd:element ref="tns:url-pattern"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="error-pageType">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element ref="tns:exception-type"/>
+                <xsd:element ref="tns:error-code"/>
+            </xsd:choice>
+            <xsd:element ref="tns:location"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="web-appType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="tns:display-name"/>
+            <xsd:element ref="tns:welcome-file-list"/>
+            <xsd:element ref="tns:filter"/>
+            <xsd:element ref="tns:filter-mapping"/>
+            <xsd:element ref="tns:listener"/>
+            <xsd:element ref="tns:servlet"/>
+            <xsd:element ref="tns:servlet-mapping"/>
+            <xsd:element ref="tns:error-page"/>
+        </xsd:choice>
+        <xsd:attribute ref="tns:id" use="required"/>
+        <xsd:attribute ref="tns:version" use="required"/>
+    </xsd:complexType>
+
+</xsd:schema>
